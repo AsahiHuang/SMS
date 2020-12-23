@@ -58,13 +58,27 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
+    
+    host: 'sms.asahih.com',
+
+    proxyTable: {
+      '/api/': {
+        target: 'http://sms.asahih.com:8443',
+        changeOrigin: true,
+        emulateJSON: true,
+        pathRewrite: {
+          '^/api': '/'
+        }
+      }
+    },
+
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

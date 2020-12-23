@@ -48,8 +48,12 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'LoginDefault',
-      component: Login
+      name: 'index',
+      redirect: '/index',
+      component: AppIndex,
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/login',
