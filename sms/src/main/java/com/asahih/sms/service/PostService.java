@@ -5,11 +5,9 @@ import com.asahih.sms.pojo.Category;
 import com.asahih.sms.pojo.Collect;
 import com.asahih.sms.pojo.Post;
 import com.asahih.sms.pojo.User;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +118,6 @@ public class PostService {
 
     // 返回用户所有收藏帖
     public List<Post> listPostByUserCollect(String username) throws Exception{
-        Sort sort = new Sort(Sort.Direction.DESC,"id");
         List<Collect> collects = collectService.listByUsernameAndCollected(username);
         List<Post> posts = new ArrayList<>();
         for (Collect collect : collects){

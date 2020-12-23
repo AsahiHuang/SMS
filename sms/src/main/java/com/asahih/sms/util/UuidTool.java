@@ -4,6 +4,8 @@ import java.util.UUID;
 
 /**
  * Created by Asahi Huang on 2020/12/10.
+ *
+ * 用于随机密码生成
  */
 public class UuidTool {
     public static String[] chars = new String[] { "a", "b", "c", "d", "e", "f",
@@ -14,6 +16,7 @@ public class UuidTool {
             "W", "X", "Y", "Z" };
 
 
+    // 通过生成UUID截取获得八位随机码
     public static String generateShortUuid() {
         StringBuffer shortBuffer = new StringBuffer();
         String uuid = UUID.randomUUID().toString().replace("-", "");
