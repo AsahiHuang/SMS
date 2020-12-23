@@ -13,14 +13,18 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Asahi Huang on 2020/10/24.
+ *
+ * Shiro 配置类
  */
 @Configuration
 public class ShiroConfiguration {
+    // 管理SHIRO生命周期
     @Bean
     public static LifecycleBeanPostProcessor getLifecycleBeanProcessor() {
         return new LifecycleBeanPostProcessor();
     }
 
+    // SHIROFilter创建工厂，用于拦截URL
     @Bean
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
@@ -35,6 +39,7 @@ public class ShiroConfiguration {
         return securityManager;
     }
 
+    // Realm得到用户信息后进行加密并返回
     @Bean
     public Realm getRealm() {
         Realm realm = new Realm();
@@ -42,6 +47,7 @@ public class ShiroConfiguration {
         return realm;
     }
 
+    // 返回加密后的用户密码信息
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
@@ -50,6 +56,7 @@ public class ShiroConfiguration {
         return hashedCredentialsMatcher;
     }
 
+    // SHIRO配置注解控制权限
     @Bean
     public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();

@@ -21,6 +21,7 @@ public class CollectController {
     @Autowired
     LogService logService;
 
+    // 添加/取消 收藏
     @PostMapping("/api/collect")
     @CrossOrigin
     public Result addOrChangeCollectCollected(@RequestBody Collect requestCollect) throws Exception {

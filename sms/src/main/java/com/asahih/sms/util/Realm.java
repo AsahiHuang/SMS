@@ -24,21 +24,25 @@ public class Realm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
-    // 简单重写获取授权信息方法
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         SimpleAuthorizationInfo s = new SimpleAuthorizationInfo();
         return s;
     }
 
-    // 获取认证信息，即根据 token 中的用户名从数据库中获取密码、盐等并返回
+    /*
+        重写 doGetAuthenticationInfo() 方法，让realm获取数据库内用户信息
+        ，即根据 token 中的用户名从数据库中获取密码、盐等并返回
+
+        subject.login()执行后调用
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-        String userName = token.getPrincipal().toString();
-        User user = userService.getUserByUsername(userName);
+        String username = token.getPrincipal().toString();
+        User user = userService.getUserByUsername(username);
         String passwordInDB = user.getPassword();
         String salt = user.getSalt();
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userName, passwordInDB, ByteSource.Util.bytes(salt), getName());
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(username, passwordInDB, ByteSource.Util.bytes(salt), getName());
         return authenticationInfo;
     }
 }

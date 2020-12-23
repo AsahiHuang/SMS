@@ -37,6 +37,7 @@ public class LoginController {
         String username = requestUser.getUsername();
         Subject subject = SecurityUtils.getSubject();
         username = HtmlUtils.htmlEscape(username);
+        // 封装用户登录信息
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(username, requestUser.getPassword());
         User user = userService.getUserByUsername(username);
         if (user != null){

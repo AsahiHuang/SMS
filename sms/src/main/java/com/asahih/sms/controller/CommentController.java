@@ -63,6 +63,7 @@ public class CommentController {
         return history;
     }
 
+    // 返回用户评论
     @GetMapping("/api/{username}/news")
     @CrossOrigin
     public List<Comment> listNewsByUsername(@PathVariable("username") String username) throws  Exception {
